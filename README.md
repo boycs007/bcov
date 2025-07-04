@@ -53,4 +53,4 @@ endif()
 - 需确保链接时包含 `gcov` 库（通常 `-coverage` 会自动处理）
 
 ## License
-请根据实际情况补充 License 信息。 
+MIT
