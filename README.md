@@ -2,7 +2,29 @@
 
 `bcov` 是一个用于 C++ 子进程覆盖率收集的小型库。它通过在子进程启动时调用 `InitChildCoverage()`，并在收到 `SIGTERM` (kill -15) 信号时自动生成覆盖率数据。
 
-## 推荐集成方式
+## 安装与集成
+
+### 方式一：标准 CMake 安装 + find_package
+
+1. **安装 bcov 到本地目录**
+    ```sh
+    cmake -S . -B build -DCMAKE_INSTALL_PREFIX=/your/install/path
+    cmake --build build
+    cmake --install build
+    ```
+
+2. **用户工程 CMakeLists.txt 示例**
+    ```cmake
+    find_package(bcov REQUIRED PATHS /your/install/path/lib/cmake/bcov)
+
+    add_executable(user_app main.cpp)
+    target_link_libraries(user_app PRIVATE bcov::bcov)
+    ```
+    头文件会自动可用，无需手动设置 include 路径。
+
+---
+
+## 推荐集成方式（源码拉取）
 
 建议通过 [FetchContent](https://cmake.org/cmake/help/latest/module/FetchContent.html) 拉取本库，并用编译宏控制是否启用覆盖率收集。
 
